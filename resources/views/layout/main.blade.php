@@ -22,7 +22,7 @@
     </nav>
     {{-- @yield('content') --}}
     @section('content')
-    <h1>this is content</h1>
+    <h1>this is content h1</h1>
     @show
 </body>
 </html>
