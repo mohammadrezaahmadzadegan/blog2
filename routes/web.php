@@ -13,12 +13,11 @@ echo 6;echo '<br>';
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('/foo', 'HomeController@foo');
-Route::get('/','HomeController@index');
-Route::get('/about','HomeController@about');
+Route::get('/',['uses'=>'HomeController@index','as'=>'login','middleware'=>['Chekuser1']]);
+
+Route::get('/about','HomeController@about')->middleware('Chekuser1');
 Route::view('/welcome', 'welcome');
 Route::view('/index', 'index',['list'=>[1,2,3,4]]);
 
