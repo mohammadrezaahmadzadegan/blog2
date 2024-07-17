@@ -7,7 +7,12 @@
 </head>
 
 <body>
-@dd($name)
-
+<form action="/po/4" method="post" enctype="multipart/form-data">
+@csrf
+<input type="file"  name="name[]" multiple>
+<input type="text" name="fname">
+<input type="text" name="lname">
+<button>send</button>
+</form>
 </body>
 </html>

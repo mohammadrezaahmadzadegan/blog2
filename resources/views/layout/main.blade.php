@@ -16,7 +16,7 @@
             </li>
 
             <li>
-                <a href="/index">form</a>
+                <a href="/form">form</a>
             </li>
         </ul>
     </nav>

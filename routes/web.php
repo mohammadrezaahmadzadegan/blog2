@@ -1,4 +1,6 @@
 <?php
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 echo '<br>';
 echo 6;echo '<br>';
@@ -12,12 +14,17 @@ echo 6;echo '<br>';
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
+Route::post('/po/{id?}','HomeController@po');
+Route::view('/form', 'form');
+Route::get('/soo/{is?}',
+function($is){
+dd($is);
+}
+);
 Route::get('/foo', 'HomeController@foo');
 Route::get('/',['uses'=>'HomeController@index','as'=>'login','middleware'=>['Chekuser1']]);
 
-Route::get('/about','HomeController@about')->middleware('Chekuser1');
+Route::get('/about','HomeController@about')->middleware(['valmiddleware:1']);
 Route::view('/welcome', 'welcome');
 Route::view('/index', 'index',['list'=>[1,2,3,4]]);
 

@@ -29,12 +29,21 @@ echo '<br>';
 echo '<br>';
 
 class rato {
-     static function ccessor()
+    public static function ccessor()
     {
-     echo 'router';
+        echo 'ccessor';
+        return new self(); // Return the class instance
+    }
+
+    public static function ccessor1()
+    {
+        echo 'eee';
     }
 }
-rato::ccessor();
+
+rato::ccessor()->ccessor1();
+$rt = new rato;
+$rt->ccessor1();
 
 class foo{
     function __invoke ($a , $b){
