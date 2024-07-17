@@ -14,11 +14,13 @@ echo 6;echo '<br>';
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('postman','HomeController@postman');
+Route::get('re','HomeController@re');
 Route::post('/po/{id?}','HomeController@po');
 Route::view('/form', 'form');
 Route::get('/soo/{is?}',
 function($is){
-dd($is);
+dd(request()->cookies->get('laravel_session'));
 }
 );
 Route::get('/foo', 'HomeController@foo');

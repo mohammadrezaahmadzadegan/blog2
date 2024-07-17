@@ -12,6 +12,8 @@
 <input type="file"  name="name[]" multiple>
 <input type="text" name="fname">
 <input type="text" name="lname">
+
+
 <button>send</button>
 </form>
 </body>
