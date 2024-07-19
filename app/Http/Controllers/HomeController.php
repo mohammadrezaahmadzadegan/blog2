@@ -9,12 +9,34 @@ class HomeController extends Controller
 {
     function __construct()
     {
-        $this->middleware('Chekuser1')->only(['index','about'])->except('about');
+        $this->middleware(['Chekuser1'])->only(['index','about']);
+        // $this->middleware('Chekuser1')->only(['index','about'])->except('about');
     }
     public function index(){
-        return 'this is index';
+        // return redirect()->route('redirect',['id'=>3])->with('id','4');
+        // dd(response([1,2,3]));
+        // return view('test');
+        // return response([1,2,3])->header('Content-Type','text/plain');
+
+        $path1 = storage_path('app/public/1.pdf');
+        // dd(response()->file($path1));
+        // return response()->download($path1,'22.txt');
+        // return response()->file($path1);
+
+        return response()->res('ali');
     }
-    public function postman(IndexRequest $request,$id){
+
+    public function redirect(){
+        return back()->withInput();
+// dd(session());
+//         return response('this is redirect');
+    }
+
+    public function st(){
+        return new \stdClass();
+        // return collect([1,2,3]);
+            }
+    public function postman(IndexRequest $request){
         return  $request->all();
     //    return $request->has('a')?'yes':'no';
     }

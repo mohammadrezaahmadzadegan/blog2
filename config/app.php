@@ -1,6 +1,5 @@
 <?php
-echo '<br>';
-echo 3;
+
 return [
 
     /*
