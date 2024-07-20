@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('na','HomeController@na');
 Route::get('st','HomeController@st');
 Route::post('postman','HomeController@postman');
 Route::get('re','HomeController@re');
@@ -25,7 +26,7 @@ dd(request()->cookies->get('laravel_session'));
 );
 Route::get('/foo', 'HomeController@foo');
 // Route::get('/',['uses'=>'HomeController@index','as'=>'login','middleware'=>['Chekuser1']]);
-Route::get('/dds','HomeController@index');
+Route::get('/','HomeController@index');
 Route::get('/redirect1/{id?}','HomeController@redirect')->name('redirect');
 Route::get('/about','HomeController@about')->middleware(['valmiddleware:1']);
 Route::view('/welcome', 'welcome');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\IndexRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -18,16 +20,27 @@ class HomeController extends Controller
         // return view('test');
         // return response([1,2,3])->header('Content-Type','text/plain');
 
-        $path1 = storage_path('app/public/1.pdf');
+        // $path1 = storage_path('app/public/1.pdf');
         // dd(response()->file($path1));
         // return response()->download($path1,'22.txt');
         // return response()->file($path1);
 
-        return response()->res('ali');
-    }
+        // return response()->res('ali');
 
+        // Log::info('this is log1');
+        // session()->put('name1','mohammadreza');
+        // session(['name'=>'ali']);
+        echo 'this is index page';
+        DB::connection()->table();
+    }
+public function na(){
+    // return session()->has('name')
+    // ?session()->get('name'):'empty'
+    // ;
+    return session(['name','empty']);
+}
     public function redirect(){
-        return back()->withInput();
+        // return back()->withInput();
 // dd(session());
 //         return response('this is redirect');
     }
