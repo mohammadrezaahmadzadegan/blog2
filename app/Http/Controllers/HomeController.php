@@ -30,9 +30,48 @@ class HomeController extends Controller
         // Log::info('this is log1');
         // session()->put('name1','mohammadreza');
         // session(['name'=>'ali']);
-        echo 'this is index page';
-        DB::connection()->table();
+        // echo 'this is index page';
+        // $resulte = DB::connection()->table('tbl1')->get();
+// if(!empty($id)){
+//     // $resulte = DB::select("select * from tbl1 where id='{$id}'");
+//     // $resulte = DB::select("select * from tbl1 where id=?",[$id]);
+//     $resulte = DB::select("select * from tbl1 where id=:id",[$id]);
+//     return view('users',['users'=>$resulte]);
+// }else{
+//     $resulte = DB::select("select * from tbl1");
+//     return view('users',['users'=>$resulte]);
+// }
+
+$resulte = DB::select("select * from tbl1");
+    return view('users',['users'=>$resulte]);
+// $resulte = DB::insert('insert into tbl1(name) value(:name)',['name'=>$request->name]);
+// return view('users',['users'=>$resulte]);
     }
+public function insert(Request $request){
+    DB::insert('insert into tbl1(name) value(:name)',['name'=>$request->name]);
+   return redirect()->route('index');
+}
+public function delete($id){
+DB::delete('delete from tbl1 where id=:id',compact('id'));
+return redirect()->route('index');
+}
+public function update($id){
+
+    $resulte = DB::select("select * from tbl1 where id=:id",['id'=>$id]);
+    return view('update',['users'=>$resulte[0]]);
+}
+public function updateSubmit($id,Request $request){
+    DB::update('update tbl1 set name=:name where id=:id',[
+        'name' => $request->name,
+        'id' => $id
+    ]);
+return redirect()->route('index');
+
+}
+public function ga(){
+   $table = DB::select('show tables');
+   dd($table);
+}
 public function na(){
     // return session()->has('name')
     // ?session()->get('name'):'empty'

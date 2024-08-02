@@ -26,12 +26,18 @@ dd(request()->cookies->get('laravel_session'));
 );
 Route::get('/foo', 'HomeController@foo');
 // Route::get('/',['uses'=>'HomeController@index','as'=>'login','middleware'=>['Chekuser1']]);
-Route::get('/','HomeController@index');
+Route::get('/','HomeController@index')->name('index');
+Route::post('/insert','HomeController@insert')->name('insert');
+Route::delete('/delete/{id?}','HomeController@delete')->name('delete');
+Route::post('/update/{id?}','HomeController@update')->name('update');
+Route::put('/updateSubmit/{id?}','HomeController@updateSubmit')->name('updateSubmit');
 Route::get('/redirect1/{id?}','HomeController@redirect')->name('redirect');
 Route::get('/about','HomeController@about')->middleware(['valmiddleware:1']);
 Route::view('/welcome', 'welcome');
 Route::view('/index', 'index',['list'=>[1,2,3,4]]);
 
 Route::post('/goo','HomeController@goo');
+Route::get('/ga','HomeController@ga');
+Route::view('start1', 'start1');
 
 
