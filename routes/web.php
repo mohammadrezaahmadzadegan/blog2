@@ -41,5 +41,9 @@ Route::get('/ga','HomeController@ga');
 Route::view('start1', 'start1',['array'=>[1,2,3,4]]);
 Route::get('/startc4','startController@index')->middleware(['startMiddleware:4']);
 Route::get('/startc2','startController@index2')->middleware(['startMiddleware:2']);
+Route::post('/st1/{id?}','startController@index3');
+Route::get('/st2','startController@index4');
+Route::post('/st3/{id?}','startController@index5');
+Route::post('/st4','startController@index6');
 
 
