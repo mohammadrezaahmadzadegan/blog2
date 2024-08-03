@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        'CheckUser' => \App\Http\Middleware\Chekuser::class
+        'CheckUser' => \App\Http\Middleware\Chekuser::class,
     ];
 
     /**
@@ -63,7 +63,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'Chekuser1' => \App\Http\Middleware\Chekuser1::class,
-        'valmiddleware' => \App\Http\Middleware\valmiddleware::class
+        'valmiddleware' => \App\Http\Middleware\valmiddleware::class,
+        'startMiddleware' =>
+        \App\Http\Middleware\startMiddleware::class
     ];
 
     /**

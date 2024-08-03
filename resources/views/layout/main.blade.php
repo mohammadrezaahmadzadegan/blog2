@@ -24,5 +24,8 @@
     @section('content')
     <h1>this is content h1</h1>
     @show
+    {{-- @include('parts.footer') --}}
+@php($year=1500)
+    @includeFirst(['parts.footer1','parts.footer'],['year1'=>1400])
 </body>
 </html>

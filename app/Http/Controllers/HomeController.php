@@ -122,4 +122,5 @@ var_dump($request->all());
    public function goo(){
     return view('form',['name'=>request()->request->get('firstname')]) ;
    }
+
 }

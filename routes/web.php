@@ -38,6 +38,8 @@ Route::view('/index', 'index',['list'=>[1,2,3,4]]);
 
 Route::post('/goo','HomeController@goo');
 Route::get('/ga','HomeController@ga');
-Route::view('start1', 'start1');
+Route::view('start1', 'start1',['array'=>[1,2,3,4]]);
+Route::get('/startc4','startController@index')->middleware(['startMiddleware:4']);
+Route::get('/startc2','startController@index2')->middleware(['startMiddleware:2']);
 
 
