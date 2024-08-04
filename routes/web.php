@@ -46,4 +46,16 @@ Route::get('/st2','startController@index4');
 Route::post('/st3/{id?}','startController@index5');
 Route::post('/st4','startController@index6');
 
+Route::get('/st6',['uses'=>'startController@index8','as'=>'stt1']);
 
+Route::get('/st665/{id?}',['uses'=>'startController@index7','as'=>'stt']);
+
+Route::get('/form11','startController@index9');
+Route::get('/form12','startController@index10');
+Route::post('/form13','startController@index11');
+Route::get('/form14','startController@index12');
+Route::get('/form15','startController@index12');
+Route::get('/form16','startController@index13');
+Route::get('/end1','startController@end1');
+Route::get('/end2','startController@end2');
+Route::get('/end3','startController@end3');

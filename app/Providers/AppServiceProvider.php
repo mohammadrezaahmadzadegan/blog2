@@ -26,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Response::macro('foo',function($val){
+            return Response::make(strtoupper($val))->header('header1','this is header1');
+        });
         Blade::directive('myphp',function($text){
             return '<?php '. $text .' ?>';
                     });
@@ -47,5 +50,14 @@ return is_int($value);
             return false;
            }
         },'value must be more 3');
+        Validator::extend('validnew',function($atrr,$val,$param,\Illuminate\Validation\Validator $validator){
+if($val < 4){
+    return true;
+} else {
+    return false;
+}
+
+        }
+        ,'value must be more 3');
     }
 }

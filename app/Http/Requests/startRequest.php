@@ -29,7 +29,15 @@ class startRequest extends FormRequest
             'birthday' => 'before:2016-1-1|date',
             'gender' => 'in:male,female|required',
             'sarbazy' => 'required_if:gender,male|in:ok,no',
-            'height' => 'integer|nullable|max:100'
+            'height' => 'integer|nullable|max:100|validnew',
+            'maharat' => 'array|required',
+            'maharat.*' => ['integer','max:10',function($arrg,$val,$faild){
+                // dd(func_get_args());
+                if($val < 3){
+
+                    return $faild($val.'this is not valid');
+                }
+            }]
         ];
     }
 }
