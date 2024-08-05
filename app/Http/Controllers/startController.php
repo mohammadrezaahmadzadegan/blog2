@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\startRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class startController extends Controller
 {
@@ -135,8 +137,8 @@ class startController extends Controller
     }
     function end1()
     {
-        session()->put('session1',456);
-        session(['name1'=>'ali','name2'=>'aly']);
+        session()->put('session1', 456);
+        session(['name1' => 'ali', 'name2' => 'aly']);
         echo '<br>';
         return response('this text for response', 200, ['new' => 44]);
     }
@@ -145,10 +147,16 @@ class startController extends Controller
     {
         echo  session()->get('session1');
         echo '<br>';
-        echo  session('name1','name1 is empty');
+        echo  session('name1', 'name1 is empty');
 
         echo '<br>';
-        echo  session('name2','name2 is empty');
+        echo  session('name2', 'name2 is empty');
+        echo '<br>';
+        echo session()->previousUrl();
+        echo '<br>';
+        echo old('name1', ' unfor ');
+        echo '<br>';
+        cookie('cookie2', 'this is value for cookie2');
         echo '<br>';
         return session()->all();
     }
@@ -156,5 +164,70 @@ class startController extends Controller
     function end3()
     {
         echo  session()->get('session1');
+        //Create a response instance
+        $response = response('hello word');
+
+        //Call the withCookie() method with the response method
+        $response->cookie('name2', '123');
+
+        //return the response
+        return $response;
+    }
+    function end4()
+    {
+        session(['array1' => 999]);
+        session()->flash('name3', 'ahmady');
+        session()->flash('name4', 'ahmady2');
+        return session()->all();
+    }
+    function end5()
+    {
+        echo $r =  session()->pull('name2');
+        echo $r =  session()->forget('session1');
+        //   session()->flush();
+        //return session()->all();
+        //session()->reflash();
+        session()->keep('name4');
+        return session()->all();
+    }
+    function index22($id = null)
+    {
+        //  $user = DB::connection()->table('tbl2')->get();
+        if (!empty($id)) {
+            $user = DB::select('select * from tbl2 where id=:id', ['id' => $id]);
+        } else {
+            $user = DB::select('select * from tbl2');
+        }
+        return view('index2', ['user' => $user]);
+    }
+    public function insert1(Request $r){
+        DB::insert('insert into tbl2 (name) value (:name)',['name'=>$r->name]);
+        return redirect()->route('index22');
+    }
+    public function remove($id){
+        DB::delete('delete from tbl2 where id=:id',['id'=>$id]);
+        return redirect()->route('index22');
+    }
+    public function update1($id){
+$users = DB::select('select * from tbl2 where id=:id',['id'=>$id])[0];
+// return view('update1',['value'=>$value])
+return view('update1',compact('users'));
+    }
+    public function updatesubmit1($id,Request $r){
+        DB::update('update tbl2 set name=:name where id=:id',['name'=>$r->name,'id'=>$id]);
+        return redirect()->route('index22');
+    }
+    public function newindex(){
+      // $tables = DB::select('show tables');
+     //  $tables = DB::statement('drop table tbl3');
+//       $tables = DB::statement('CREATE TABLE `laravel`.`tbl3` ( `id` INT(255) NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+// ');
+
+// $tbl = 'tbl3';
+// //$tables = DB::statement("drop table {$tbl}");
+//       DB::statement('CREATE TABLE `laravel`.`tbl4` ( `id` INT(255) NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+// ');
+$r = DB::insert('insert into tbl3 (name) value (:name)',['name'=>'reza']);
+dd($r);
     }
 }

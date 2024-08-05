@@ -13,6 +13,8 @@ class EncryptCookies extends Middleware
      */
     protected $except = [
        'cookie1',
-       'rato'
+       'rato',
+       'cookie2',
+       'name2'
     ];
 }

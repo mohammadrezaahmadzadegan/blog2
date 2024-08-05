@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+DB::listen(function($query){
+   // dd($query);
+    Log::debug($query->sql,[$query->bindings,$query->time]);
+});
         Response::macro('foo',function($val){
             return Response::make(strtoupper($val))->header('header1','this is header1');
         });
