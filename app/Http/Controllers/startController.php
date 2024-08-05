@@ -227,7 +227,18 @@ return view('update1',compact('users'));
 // //$tables = DB::statement("drop table {$tbl}");
 //       DB::statement('CREATE TABLE `laravel`.`tbl4` ( `id` INT(255) NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 // ');
-$r = DB::insert('insert into tbl3 (name) value (:name)',['name'=>'reza']);
-dd($r);
+DB::statement('truncate tbl3');
+try {
+
+DB::transaction(function(){
+    DB::insert('insert into tbl3 (name) value (:name)',['name'=>'reza1']);
+    DB::insert('insert into tbl3 (name) value (:name)',['name'=>'reza2']);
+    DB::insert('insert into tbl3 (name) value (:name1)',['name11'=>'reza3']);
+});
+} catch (\Exception $e) {
+    DB::rollBack();
+    Log::error($e);
+    throw $e;
+}
     }
 }
