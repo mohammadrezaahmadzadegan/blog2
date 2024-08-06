@@ -227,18 +227,120 @@ return view('update1',compact('users'));
 // //$tables = DB::statement("drop table {$tbl}");
 //       DB::statement('CREATE TABLE `laravel`.`tbl4` ( `id` INT(255) NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 // ');
-DB::statement('truncate tbl3');
-try {
+// DB::statement('truncate tbl3');
+// try {
 
-DB::transaction(function(){
-    DB::insert('insert into tbl3 (name) value (:name)',['name'=>'reza1']);
-    DB::insert('insert into tbl3 (name) value (:name)',['name'=>'reza2']);
-    DB::insert('insert into tbl3 (name) value (:name1)',['name11'=>'reza3']);
-});
-} catch (\Exception $e) {
-    DB::rollBack();
-    Log::error($e);
-    throw $e;
+// DB::transaction(function(){
+//     DB::insert('insert into tbl3 (name) value (:name)',['name'=>'reza1']);
+//     DB::insert('insert into tbl3 (name) value (:name)',['name'=>'reza2']);
+//     DB::insert('insert into tbl3 (name) value (:name1)',['name11'=>'reza3']);
+// });
+// } catch (\Exception $e) {
+//     DB::rollBack();
+//     Log::error($e);
+//     throw $e;
+// }
+
+// DB::statement('truncate users');
+// try {
+
+// DB::transaction(function(){
+//  $count = 15;
+//  while($count--){
+//     DB::insert('insert into users (username,password) value (:username,:password)',['username'=>'user'.($count+1),'password'=>random_int(100000,999999)]);
+//  }
+// });
+// } catch (\Exception $e) {
+//     DB::rollBack();
+
+//     dd('trans failed');
+// }
+
+// $r = DB::select('select * from users order by password desc');
+// $r = DB::select('select * from users order by password asc');
+// $r = DB::select("select * from users where (password > :n)",['n'=>222222]);
+// $r = DB::table('users')->where([
+//     ['password','>','405248']
+// ]);
+// $r = DB::table('users')->where('password','>','444444')->orWhere('password','<','444444');
+// dd($r->get());
+// $r = DB::table('users')->whereBetween('id',[1,5]);
+// dd($r->toSql());
+// $r = DB::select("select * from users where id between :id1 and :id2",['id1'=>1,'id2'=>6]);
+// $r = DB::table('users')->whereNotBetween('id',[1,5]);
+//  dd($r->toSql());
+// $r = DB::select("select * from users where id not between :id1 and :id2",['id1'=>1,'id2'=>6]);
+// dd($r);
+// $r = DB::table('users')->whereIn('id',[1,5]);
+// dd($r->toSql());
+// $r = DB::select("select * from users where id in (:id1,:id2)",['id1'=>1,'id2'=>6]);
+// dd($r);
+// $r = DB::select("select * from users where id not in (:id1,:id2)",['id1'=>1,'id2'=>6]);
+// dd($r);
+$r = DB::table('users')->whereNull('username');
+$r = DB::table('users')->whereNotNull('username');
+$r = DB::table('users')->whereColumn('username','=','password');
+$r = DB::table('users')->whereColumn('username','<>','password');
+$r = DB::table('users')->where('password','>','333333');
+$r = DB::table('users')->where(
+function ($query){
+    $query->where('password','<','333333');
+   // $query->where('password','=','127971');
+    $query->where('id','=','8');
 }
-    }
+);
+
+// $a = 32;
+// echo intval($a) . "<br>";
+
+// $b = 3.2;
+// echo intval($b) . "<br>";
+
+// $c = "32.5";
+// echo intval($c) . "<br>";
+
+// $d = array();
+// echo  intval($d) . "<br>";
+
+// $e = array("red", "green", "blue");
+//     }
+// $r = DB::select('select * from users');
+//  dd(count($r));
+// foreach ($r as $user) {
+//    echo $user->id;
+//    echo '<br>';
+//    echo $user->username;
+//    echo '<br>';
+
+//    echo $user->password;
+// echo '<hr>';
+// }
+// $r = DB::table('users')->whereExists(function($query){
+// $query->selectRaw('1')->whereRaw('1=1');
+// });
+// $r = DB::select("select * from `users` where exists (select 1 where 1=1)");
+// $r = DB::table('users')->whereExists(function($query){
+//     $query->select(DB::raw(1))->where(DB::raw(1),1);
+//     });
+// dd($r->get());
+// $r = DB::select('select * from users order by id desc');
+// $r = DB::table('users')->orderByDesc('id');
+// $r = DB::table('users')->orderBy('id')->orderBy('password');
+// $r = DB::table('users')->inRandomOrder('id');
+// $r = DB::select("SELECT * FROM users LIMIT 3 OFFSET 5");
+// $r = DB::table('users')->offset(4)->limit(10)->orderBy('password');
+// $r = DB::table('users')->where('id','>',0)->orderBy('id');
+
+// dd($r->first());
+// dd($r->value('id'));
+// dd($r->pluck('id','password'));
+// dd($r->count('password'));
+// dd($r->count('*'));
+// dd($r->min('id'));
+// dd($r->max('id'));
+// dd($r->distinct()->pluck('username'));
+
+
+
+}
 }

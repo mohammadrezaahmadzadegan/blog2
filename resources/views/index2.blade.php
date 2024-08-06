@@ -1,4 +1,22 @@
 @php
+namespace inter;
+interface myinterface{
+    public static function pay($num1,$num2);
+}
+class payment implements myinterface {
+    public static function pay($num1,$num2){
+       echo $num1 + $num2;
+    }
+}
+class review {
+    public static function rev(myinterface $r){
+        $r::pay(1,23);
+    }
+}
+$r = new payment;
+echo review::rev($r);
+
+
 namespace ttt;
 class rt{
     function ee1(){
@@ -8,6 +26,71 @@ echo 'rt';
 
 
 }
+
+
+interface Birdinterface{
+    public static function sum($num1,$num2);
+}
+class pangan implements Birdinterface{
+    public static function sum($num1,$num2){
+        echo $num1 + $num2;
+    }
+}
+class number{
+    public static function nums(Birdinterface $nom){
+        $nom::sum(11,12);
+    }
+}
+$resulte = new pangan;
+number::nums($resulte);
+
+
+
+
+
+class pas{
+    public function creat():array
+    {
+        return [];
+    }
+}
+$ra = new pas;
+$ra->creat();
+
+
+echo '<hr>';
+// factory method
+interface toy{
+  public function play();
+}
+class car implements toy{
+    public function play(){
+        echo 'this is car';
+    }
+}
+
+class bic implements toy{
+    public function play(){
+        echo 'this is bic';
+    }
+}
+class toyfactory{
+    public function mt($type)
+    {
+        if ($type === 'car') {
+            return new car;
+        } elseif ($type === 'bic'){
+            return new bic;
+        } else {
+            throw new Exception("Error");
+
+        }
+    }
+}
+$r2 = new toyfactory;
+$r2->mt('car')->play();
+$r2->mt('bic')->play();
+echo '<hr>';
 
 namespace ttt1;
 use ttt\rt;
@@ -43,5 +126,6 @@ $ramo->ee1();
         </tr>
     @endforeach
 </table>
+
 </body>
 </html>
