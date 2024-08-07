@@ -67,3 +67,4 @@ Route::delete('/remove/{id?}',['uses'=>'startController@remove','as'=>'remove'])
 Route::get('/update1/{id?}',['uses'=>'startController@update1','as'=>'update1']);
 Route::put('/updatesubmit1/{id?}',['uses'=>'startController@updatesubmit1','as'=>'updatesubmit1']);
 Route::get('/newindex','startController@newindex');
+Route::get('/join','startController@joine');

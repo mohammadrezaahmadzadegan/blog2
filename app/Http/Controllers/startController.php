@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\startRequest;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Response;
@@ -340,7 +341,46 @@ function ($query){
 // dd($r->max('id'));
 // dd($r->distinct()->pluck('username'));
 
+// $r = DB::table('users')->select(DB::raw('id'),DB::raw('password'),DB::raw('username'));
 
+// $r = DB::table('users')->select(DB::raw('sum(id)/2 as sum'),DB::raw('password'),DB::raw('username'))->groupBy('id')->having('password','>','0');
+// // groupBy magadir tecrary ro yek mord ro dar nazar migire
+// dd($r->get());
+
+
+DB::statement('truncate users');
+try {
+
+DB::transaction(function(){
+ $count = 15;
+ while($count--){
+    $id = DB::table('users')->insertGetId([
+        'username'=>'user'.($count+1),'password'=>random_int(100000,999999)
+    ]);
+    foreach (range(1,random_int(1,5)) as $index) {
+        DB::insert('insert into posts (user_id,title,body) values (:userid, :title,:body)', [
+            'userid'=>$id,
+            'title'=>random_int(1000,9999),
+            'body'=>random_int(100000,999999)
+        ]);
+    }
+ }
+});
+} catch (\Exception $e) {
+    DB::rollBack();
+
+    dd('trans failed');
+}
 
 }
+
+public function joine(){
+   $r = DB::table('users')->join('posts','users.id','=','user_id')->select('users.username','users.password','posts.*');
+    // dd($r->get());
+    $r = DB::table('users')->join('posts',function(JoinClause $join){
+        $join->on('users.username','=','posts.title');
+    })->select('users.username','users.password','posts.*');
+    dd($r->get());
+}
+
 }
