@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\post;
 use App\Http\Requests\startRequest;
+use App\person;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -330,6 +332,7 @@ function ($query){
 // $r = DB::table('users')->inRandomOrder('id');
 // $r = DB::select("SELECT * FROM users LIMIT 3 OFFSET 5");
 // $r = DB::table('users')->offset(4)->limit(10)->orderBy('password');
+// $r = DB::table('users')->skip(4)->take(10)->orderBy('password');
 // $r = DB::table('users')->where('id','>',0)->orderBy('id');
 
 // dd($r->first());
@@ -349,6 +352,7 @@ function ($query){
 
 
 DB::statement('truncate users');
+DB::statement('truncate posts');
 try {
 
 DB::transaction(function(){
@@ -380,7 +384,55 @@ public function joine(){
     $r = DB::table('users')->join('posts',function(JoinClause $join){
         $join->on('users.username','=','posts.title');
     })->select('users.username','users.password','posts.*');
-    dd($r->get());
+    $r = DB::table('users')->join('posts',function(JoinClause $join){
+        $join->on('users.username','=','posts.title');
+        $join->orOn('users.id','=','posts.user_id');
+    })->select('users.username','users.password','posts.*');
+    $r = DB::table('users')->leftJoin('posts',function(JoinClause $join){
+        $join->on('users.username','=','posts.title');
+    });
+    $r = DB::table('users')->Join('posts',function(JoinClause $join){
+        $join->on('users.username','=','posts.title');
+    });
+    $one = DB::table('users')->where('id','=','3');
+    $two = DB::table('users')->where('id','=','4');
+
+    dd($one->union($two)->get());
+}
+
+public function posts()
+{
+    // $posts = post::find(1);
+    // dd($posts->id);
+    // dd($posts->get());
+
+   // $posts = person::find(1);
+
+  //  dd($posts);
+//   $post = new person();
+//   $post->name = 'ahmad';
+//   $post->save();
+
+// $post = person::create([
+//     'name'=>'ali'
+// ]);
+// $post = new person([
+//     'name' => 'reza'
+// ]);
+// $post->save();
+person::firstOrCreate([
+    'id'=>53,
+    'name'=>'hasan1'
+]);
+$id =33;
+// person::firstOrCreate(
+// [
+//     'id'=>$id
+// ],
+// [
+// 'name'=>'javad'
+// ]
+// );
 }
 
 }

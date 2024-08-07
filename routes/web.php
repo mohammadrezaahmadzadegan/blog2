@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,3 +68,4 @@ Route::get('/update1/{id?}',['uses'=>'startController@update1','as'=>'update1'])
 Route::put('/updatesubmit1/{id?}',['uses'=>'startController@updatesubmit1','as'=>'updatesubmit1']);
 Route::get('/newindex','startController@newindex');
 Route::get('/join','startController@joine');
+Route::get('/posts','startController@posts');
